@@ -4,46 +4,70 @@ require_relative './film'
 class TopFilms::CLI
 
   def call
-    list_rankings
-    menu
-    goodbye
+    start
+  end
+
+  def start
+    input = ""
+    while input != "exit"
+
+      puts "Which rankings would you like to see? Type the corresponding letter."
+
+      list_rankings
+
+      input = gets.strip.downcase
+
+      if input != "exit"
+        film_list(input)
+      else
+        goodbye
+        break
+      end
+
+      puts "Select a film to see the description. Type the ranking number."
+
+      input = gets.strip.downcase
+
+      film_description(input)
+
+    end
+  end
+
+  def film_list(input)
+    if input == "a"
+      TopFilms::Film.all[0..24].each.with_index(1) do |film, i|
+        puts "#{i}. #{film.title} (#{film.year}) #{film.rating}/10"
+      end
+    elsif input == "b"
+      TopFilms::Film.all[25..49].each.with_index(26) do |film, i|
+        puts "#{i}. #{film.title} (#{film.year}) #{film.rating}/10"
+      end
+    elsif input == "c"
+      TopFilms::Film.all[50..74].each.with_index(51) do |film, i|
+        puts "#{i}. #{film.title} (#{film.year}) #{film.rating}/10"
+      end
+    elsif input == "d"
+      TopFilms::Film.all[75..99].each.with_index(76) do |film, i|
+        puts "#{i}. #{film.title} (#{film.year}) #{film.rating}/10"
+      end
+    else
+      puts "Please type a range to view films or type exit."
+      list_rankings
+    end
+  end
+
+  def film_description(input)
+    puts "#{TopFilms::Film.all[input.to_i - 1].title}:"
+    puts "#{TopFilms::Film.all[input.to_i - 1].description}"
   end
 
   def list_rankings
-    puts "For films 1-25 type 1. 26-50 type 2. 51-75 type 3. 76-100 type 4."
-  end
-
-  def menu
-    input = nil
-    until input == "exit"
-      puts <<~DOC
-        To see the rankings type 'rankings'.
-        To leave type 'exit'
-      DOC
-      input = gets.strip.downcase
-      case input
-      when "1"
-        TopFilms::Film.all[0..25].each.with_index(1) do |film, i|
-          puts "#{i}. #{film.title}"
-        end
-      when "2"
-        TopFilms::Film.all[25..50].each.with_index(26) do |film, i|
-          puts "#{i}. #{film.title}"
-        end
-      when "3"
-        TopFilms::Film.all[50..75].each.with_index(51) do |film, i|
-          puts "#{i}. #{film.title}"
-        end
-      when "4"
-        TopFilms::Film.all[75..100].each.with_index(76) do |film, i|
-          puts "#{i}. #{film.title}"
-        end
-      when "rankings"
-        list_rankings
-      else
-        puts "Not sure what you want."
-      end
-    end
+    puts <<~DOC
+      A. 1-25
+      B. 26-50
+      C. 51-75
+      D. 76-100
+    DOC
   end
 
   def goodbye
