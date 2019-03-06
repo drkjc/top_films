@@ -4,5 +4,5 @@ require 'open-uri'
 
 require_relative './top_films/cli'
 require_relative './top_films/film'
-#require_relative './top_films/scraper'
+require_relative './top_films/scraper'
 require_relative './top_films/version'
