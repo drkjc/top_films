@@ -2,15 +2,17 @@ require_relative './version'
 
 class TopFilms::Film
 
-  attr_accessor :title, :rating, :year, :description
+  attr_accessor :title, :rating, :year, :description, :rating, :genre
 
   @@all = []
 
-  def initialize(title = nil, rating = nil, year = nil, description = nil)
+  def initialize(title = nil, rating = nil, year = nil, description = nil, rating = nil, genre = nil)
     @title = title
     @rating = rating
     @year = year
     @description = description
+    @rating = rating
+    @genre = genre
     @@all << self
   end
 
