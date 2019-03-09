@@ -5,13 +5,15 @@ class TopFilms::Scraper
   attr_accessor :page1, :page2
 
   def initialize
+    get_page1
+    make_frst_50
   end
 
-  def self.get_page1
+  def get_page1
     @page1 = Nokogiri::HTML(open("https://www.imdb.com/search/title?groups=top_250&sort=user_rating")).css("div.lister-item.mode-advanced")
   end
 
-  def self.make_frst_50
+  def make_frst_50
     get_page1.each.with_index do |data, i|
       film = TopFilms::Film.new
       film.title = @page1.css("div.lister-item h3.lister-item-header a")[i].text

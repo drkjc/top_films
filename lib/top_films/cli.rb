@@ -1,7 +1,10 @@
 require_relative './version'
 require_relative './film'
+require_relative './scraper'
 
 class TopFilms::CLI
+
+  TopFilms::Scraper.new
 
   def call
     start
@@ -36,19 +39,19 @@ class TopFilms::CLI
   def film_list(input)
     if input == "a"
       TopFilms::Film.all[0..24].each.with_index(1) do |film, i|
-        puts "#{i}. #{film.title} (#{film.year}) #{film.rating}/10"
+        puts "#{i}. #{film.title} #{film.year} #{film.rating}/10"
       end
     elsif input == "b"
       TopFilms::Film.all[25..49].each.with_index(26) do |film, i|
-        puts "#{i}. #{film.title} (#{film.year}) #{film.rating}/10"
+        puts "#{i}. #{film.title} #{film.year} #{film.rating}/10"
       end
     elsif input == "c"
       TopFilms::Film.all[50..74].each.with_index(51) do |film, i|
-        puts "#{i}. #{film.title} (#{film.year}) #{film.rating}/10"
+        puts "#{i}. #{film.title} #{film.year} #{film.rating}/10"
       end
     elsif input == "d"
       TopFilms::Film.all[75..99].each.with_index(76) do |film, i|
-        puts "#{i}. #{film.title} (#{film.year}) #{film.rating}/10"
+        puts "#{i}. #{film.title} #{film.year} #{film.rating}/10"
       end
     else
       puts "Please type a range to view films or type exit."
