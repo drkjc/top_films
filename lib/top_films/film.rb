@@ -2,7 +2,7 @@ require_relative './version'
 
 class TopFilms::Film
 
-  attr_accessor :title, :rating, :year, :description, :rating, :genre
+  attr_accessor :title, :rating, :year, :description, :advisory, :genre
 
   @@all = []
 
@@ -18,6 +18,12 @@ class TopFilms::Film
 
   def self.all
     @@all
+  end
+
+  def self.make_film_titles
+    get_first_50_titles.each do |t|
+      Film.new(t)
+    end
   end
 
 
