@@ -20,6 +20,10 @@ class TopFilms::Film
     @@all
   end
 
+  def self.add_film
+    @@all << self
+  end
+
   def self.make_film_titles
     get_first_50_titles.each do |t|
       Film.new(t)
