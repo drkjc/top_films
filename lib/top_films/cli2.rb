@@ -7,7 +7,7 @@ puts
 
 class TopFilms::CLI2
 
-  attr_accessor :list_letter
+  attr_accessor :list_letter, :film, :rank_num
 
   TopFilms::Scraper.new.make_frst_50
 
@@ -35,9 +35,9 @@ class TopFilms::CLI2
     puts
     puts "Films are in ranked order. Type rank number to explore the film."
     puts
-    rank_num = gets.strip.downcase
-    puts
-    film_description(rank_num)
+    @rank_num = gets.strip.downcase
+    @film = get_film(rank_num)
+    film_description(film)
     puts
     puts "To see another film type 'list'. To see rankings type 'rank'. To exit type 'exit'."
     input = gets.strip.downcase
@@ -77,16 +77,20 @@ class TopFilms::CLI2
     end
   end
 
-  def film_description(rank_num)
-    puts "------------#{TopFilms::Film.all[rank_num.to_i - 1].title}------------"
+  def get_film(rank_num)
+    TopFilms::Film.all[rank_num.to_i - 1]
+  end
+
+  def film_description(film)
+    puts "------------#{film.title}------------"
     puts
-    puts "Year: #{TopFilms::Film.all[rank_num.to_i - 1].year}"
-    puts "Rated: #{TopFilms::Film.all[rank_num.to_i - 1].advisory}"
-    puts "Genre: #{TopFilms::Film.all[rank_num.to_i - 1].genre}"
+    puts "Year: #{film.year}"
+    puts "Rated: #{film.advisory}"
+    puts "Genre: #{film.genre}"
     puts
     puts "------------Description:------------"
     puts
-    puts "#{TopFilms::Film.all[rank_num.to_i - 1].description}"
+    puts "#{film.description}"
     puts
     puts "------------------------------------"
     puts
