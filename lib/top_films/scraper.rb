@@ -4,10 +4,10 @@ class TopFilms::Scraper
 
   attr_accessor :page1, :page2
 
-  def initialize
-    get_page1
-    make_frst_50
-  end
+  # def initialize
+  #   get_page1
+  #   make_frst_50
+  # end
 
   def get_page1
     @page1 = Nokogiri::HTML(open("https://www.imdb.com/search/title?groups=top_250&sort=user_rating")).css("div.lister-item.mode-advanced")
