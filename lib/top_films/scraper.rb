@@ -21,7 +21,6 @@ class TopFilms::Scraper
       film.run_time = @page1.css("span.runtime")[i].text
       film.votes = @page1.css("p.sort-num_votes-visible span:nth-child(2)")[i].text
       film.description = @page1.css("div.lister-item-content p.text-muted:nth-child(4)")[i].text.strip
-      binding.pry
     end
     TopFilms::Film.all
   end
