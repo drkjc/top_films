@@ -39,7 +39,7 @@ class TopFilms::CLI2
     @film = get_film(rank_num)
     film_description(film)
     puts
-    puts "To see another film type 'list'. To see rankings type 'rank'. To exit type 'exit'."
+    puts "To see another film type 'list'. Rankings type 'rank'. Exit type 'exit'."
     input = gets.strip.downcase
     puts
     if input == "list"
@@ -82,21 +82,22 @@ class TopFilms::CLI2
   end
 
   def film_description(film)
-    lineWidth = 50
+    lineWidth = 75
     puts ("~*~*~*~*~*~*~#{film.title}#{film.year}~*~*~*~*~*~*~".center(lineWidth))
     puts
-    puts "#{film.advisory} | #{film.run_time} | #{film.genre}"
+    puts ("#{film.advisory} | #{film.run_time} | #{film.genre}".center(lineWidth))
     puts
-    puts "#{film.rating}/10 based on #{film.votes} votes."
+    puts ("#{film.rating}/10 based on #{film.votes} votes.".center(lineWidth))
     puts
-    puts "____________Description:____________"
+    puts ("____________Description:____________".center(lineWidth))
     puts
-    puts "#{film.description}"
-    puts "------------------------------------"
-    puts "Director: #{film.director}"
+    puts ("#{film.description}".center(lineWidth))
+    puts ("------------------------------------".center(lineWidth))
+    puts ("Director: #{film.director}".center(lineWidth))
     puts
-    puts "Stars: #{film.lead_actors}"
-    puts "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*"
+    puts ("Stars: #{film.lead_actors}".center(lineWidth))
+    puts
+    puts ("*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*".center(lineWidth))
   end
 
 end
