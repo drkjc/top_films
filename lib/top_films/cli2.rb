@@ -13,7 +13,7 @@ class TopFilms::CLI2
 
   def call
     puts "These are the top 50 films of all time based on user rating."
-    puts ""
+    puts
     start
     interact
   end
@@ -82,18 +82,21 @@ class TopFilms::CLI2
   end
 
   def film_description(film)
-    puts "------------#{film.title}------------"
+    lineWidth = 50
+    puts ("~*~*~*~*~*~*~#{film.title}#{film.year}~*~*~*~*~*~*~".center(lineWidth))
     puts
-    puts "Year: #{film.year}"
-    puts "Rated: #{film.advisory}"
-    puts "Genre: #{film.genre}"
+    puts "#{film.advisory} | #{film.run_time} | #{film.genre}"
     puts
-    puts "------------Description:------------"
+    puts "#{film.rating}/10 based on #{film.votes} votes."
+    puts
+    puts "____________Description:____________"
     puts
     puts "#{film.description}"
-    puts
     puts "------------------------------------"
+    puts "Director: #{film.director}"
     puts
+    puts "Stars: #{film.lead_actors}"
+    puts "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*"
   end
 
 end
