@@ -18,7 +18,7 @@ class TopFilms::Scraper
         film.title = page.css("div.lister-item h3.lister-item-header a")[i].text
         film.rating = page.css("div.ratings-imdb-rating strong")[i].text
         film.year = page.css("h3.lister-item-header span.lister-item-year")[i].text
-        page.css("div.lister-item-content p.text-muted span.certificate")[i].nil? ? film.advisory = "n/a" : film.advisory = page.css("p.text-muted span.certificate")[i].text
+        film.advisory = page.css("div.lister-item-content p.text-muted:nth-child(n+1):nth-child(-n+2)")[i].text.split("\n").join.strip.split.shift
         film.genre = page.css("span.genre")[i].text.split.join
         film.director = page.css("div.lister-item-content p:nth-child(5) a:first-child")[i].text
         film.lead_actors = page.css("div.lister-item-content p:nth-child(5)")[i].text.split("\n").drop(5).join.strip
@@ -29,6 +29,7 @@ class TopFilms::Scraper
       end
     end
     TopFilms::Film.all
+
   end
 
 end
