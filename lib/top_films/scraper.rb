@@ -21,7 +21,7 @@ class TopFilms::Scraper
         film.advisory = page.css("div.lister-item-content p.text-muted:nth-child(n+1):nth-child(-n+2)")[i].text.split("\n").join.strip.split.shift
         film.genre = page.css("span.genre")[i].text.split.join
         film.director = page.css("div.lister-item-content p:nth-child(5) a:first-child")[i].text
-        film.lead_actors = page.css("div.lister-item-content p:nth-child(5)")[i].text.split("\n").drop(5).join.strip
+        film.lead_actors = page.css("div.lister-item-content p:nth-child(5)")[i].text.split("\n").drop(5).join.strip.gsub("Stars:", "")
         film.run_time = page.css("span.runtime")[i].text
         film.votes = page.css("p.sort-num_votes-visible span:nth-child(2)")[i].text
         film.description = page.css("div.lister-item-content p.text-muted:nth-child(4)")[i].text.strip
@@ -29,7 +29,7 @@ class TopFilms::Scraper
       end
     end
     TopFilms::Film.all
-
+    binding.pry
   end
 
 end
