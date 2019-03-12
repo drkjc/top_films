@@ -5,6 +5,8 @@ class TopFilms::Film
   attr_accessor :title, :rating, :year, :advisory, :genre, :director, :lead_actors, :run_time, :votes, :description
 
   @@all = []
+  # @@first_50 = []
+  # @@second_50 = []
 
   def initialize(title = nil, rating = nil, year = nil, advisory = nil, genre = nil, director = nil, lead_actors = nil, run_time = nil, votes = nil, description = nil)
     @title = title
@@ -17,11 +19,15 @@ class TopFilms::Film
     @run_time = run_time
     @votes = votes
     @description = description
-    @@all << self
+    # @@all << self
   end
 
   def self.all
     @@all
+  end
+
+  def add_film
+    @@all << self
   end
 
 end

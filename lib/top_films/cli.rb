@@ -2,51 +2,67 @@ require_relative './version'
 require_relative './film'
 require_relative './scraper'
 
+puts "Welcome! Gathering your film list."
+puts
+
 class TopFilms::CLI
 
-  puts "Welcome! Gathering your film list."
-  puts
+  #colorize gem
+
+  attr_accessor :list_letter, :film, :rank_num
+
+  TopFilms::Scraper.new.make_films
 
   def call
-    TopFilms::Scraper.new.make_frst_50
-    puts "These are the top 50 films of all time based on user rating."
-    puts ""
+    puts "These are the top 100 films of all time based on user rating."
+    puts
     start
+    interact
   end
 
   def start
-
     puts <<~DOC
     Which films would you like to see?
     Type the letter for the corresponding list.
 
       A. 1-25
       B. 26-50
+      C. 51-75
+      D. 76-100
     DOC
+    @list_letter = gets.strip.downcase
+  end
 
-    list_letter = gets.strip.downcase
+  def interact
     puts
+
     film_list(list_letter)
     puts
+
     puts "Films are in ranked order. Type rank number to explore the film."
     puts
-    rank_num = gets.strip.downcase
+
+    @rank_num = gets.strip.downcase
+
+    @film = get_film(rank_num)
+
+    film_description(film)
     puts
-    film_description(rank_num)
-    puts
-    puts "To see another film type 'list'. To see rankings type 'rank'. To exit type 'exit'."
+
+    puts "To see another film type 'list'. Rankings type 'rank'. Exit type 'exit'."
     input = gets.strip.downcase
     puts
+
     if input == "list"
-      start
+      interact
     elsif input == "rank"
-      start
+      call
     elsif input == "exit"
       puts "See you next time!"
       exit
     else
       puts "Please try again."
-      start
+      call
     end
 
   end
@@ -58,74 +74,42 @@ class TopFilms::CLI
       end
     elsif list_letter == "b"
       TopFilms::Film.all[25..49].each.with_index(26) do |film, i|
-        puts "#{i}. #{film.title} #{film.rating}/10"
+        puts "#{i}. #{film.title}"
       end
     elsif list_letter == "c"
       TopFilms::Film.all[50..74].each.with_index(51) do |film, i|
-        puts "#{i}. #{film.title} #{film.year} #{film.rating}/10"
+        puts "#{i}. #{film.title}"
       end
     elsif list_letter == "d"
       TopFilms::Film.all[75..99].each.with_index(76) do |film, i|
-        puts "#{i}. #{film.title} #{film.year} #{film.rating}/10"
+        puts "#{i}. #{film.title}"
       end
     else
-      puts "Please type a range to view films or type exit."
+      puts "Please type a letter."
     end
   end
 
-  def film_description(rank_num)
-    puts "------------#{TopFilms::Film.all[rank_num.to_i - 1].title}------------"
-    puts
-    puts "Year: #{TopFilms::Film.all[rank_num.to_i - 1].year}"
-    puts "Rated: #{TopFilms::Film.all[rank_num.to_i - 1].advisory}"
-    puts "Genre: #{TopFilms::Film.all[rank_num.to_i - 1].genre}"
-    puts
-    puts "------------Description:------------"
-    puts
-    puts "#{TopFilms::Film.all[rank_num.to_i - 1].description}"
-    puts
-    puts "------------------------------------"
-    puts
+  def get_film(rank_num)
+    TopFilms::Film.all[rank_num.to_i - 1]
   end
 
-  # def start
-  #   input = ""
-  #   while input != "exit"
-  #
-  #     puts "Which rankings would you like to see? Type the corresponding letter."
-  #
-  #     list_rankings
-  #
-  #     input = gets.strip.downcase
-  #
-  #     if input != "exit"
-  #       film_list(input)
-  #     else
-  #       goodbye
-  #       break
-  #     end
-  #
-  #     puts "Select a film to see the description. Type the ranking number."
-  #
-  #     input = gets.strip.downcase
-  #
-  #     film_description(input)
-  #
-  #   end
-  # end
-
-  # def list_rankings
-  #   puts <<~DOC
-  #     A. 1-25
-  #     B. 26-50
-  #     C. 51-75
-  #     D. 76-100
-  #   DOC
-  # end
-
-  # def goodbye
-  #   puts "Goodbye!"
-  # end
-
+  def film_description(film)
+    lineWidth = 75
+    puts ("~*~*~*~*~*~*~  #{film.title}#{film.year}  ~*~*~*~*~*~*~".center(lineWidth))
+    puts
+    puts ("#{film.advisory} | #{film.run_time} | #{film.genre}".center(lineWidth))
+    puts
+    puts ("#{film.rating}/10 based on #{film.votes} votes.".center(lineWidth))
+    puts
+    puts ("____________Description:____________".center(lineWidth))
+    puts
+    puts ("#{film.description}".center(lineWidth))
+    puts ("------------------------------------".center(lineWidth))
+    puts ("Director: #{film.director}".center(lineWidth))
+    puts
+    puts ("Stars: #{film.lead_actors}".center(lineWidth))
+    puts
+    puts ("*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*".center(lineWidth))
+  end
 
 end
