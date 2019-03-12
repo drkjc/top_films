@@ -29,6 +29,7 @@ class TopFilms::CLI
       B. 26-50
       C. 51-75
       D. 76-100
+
     DOC
     @list_letter = gets.strip.downcase
   end
