@@ -51,7 +51,7 @@ class TopFilms::CLI
     puts
 
     menu_bar
-    
+
   end
 
   def film_list(list_letter)
@@ -73,7 +73,8 @@ class TopFilms::CLI
       end
     elsif list_letter == "x"
       film = TopFilms::Film.all.sample
-      puts film_description(film)
+      @rank_num = TopFilms::Film.all.find_index(film) + 1
+      film_description(film)
       menu_bar
     else
       puts "Please type a letter."
@@ -87,7 +88,7 @@ class TopFilms::CLI
 
   def film_description(film)
     lineWidth = 80
-    puts ("~*~*~*~*~*~*~  #{film.title}#{film.year}  ~*~*~*~*~*~*~".center(lineWidth)).light_yellow
+    puts ("~*~*~*~*~  #{rank_num}. #{film.title} #{film.year}  ~*~*~*~*~".center(lineWidth)).light_yellow
     puts
     puts ("#{film.advisory} | #{film.run_time} | #{film.genre}".center(lineWidth))
     puts
