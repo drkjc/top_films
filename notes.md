@@ -11,4 +11,11 @@ User types in "Surprise me!" and the output is a random movie.
   -Year
   -Description
 
-  
+Problems encountered:
+
+Requirements
+Scraping multiple pages
+Scraping data when it varied between items
+Grouping methods in cli to create usable loops
+Class methods vs instance methods
+Formatting CLI
