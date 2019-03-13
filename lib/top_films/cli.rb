@@ -2,7 +2,7 @@ require_relative './version'
 require_relative './film'
 require_relative './scraper'
 
-puts "Welcome! Gathering your film list."
+puts "Welcome! Please hold while I gather your film list."
 puts
 
 class TopFilms::CLI
@@ -21,19 +21,20 @@ class TopFilms::CLI
   def start
     puts <<~DOC
     Which films would you like to see?
-    Type the letter for the corresponding list.
+    Enter a letter for the corresponding list.
 
       A. 1-25
       B. 26-50
       C. 51-75
       D. 76-100
 
+      If you'd like to see a random film, type 'x'.
+
     DOC
     @list_letter = gets.strip.downcase
   end
 
   def interact
-    lineWidth = 80
     puts
 
     film_list(list_letter)
@@ -49,22 +50,8 @@ class TopFilms::CLI
     film_description(film)
     puts
 
-    puts ("To see another film type 'list'. Rankings type 'rank'. Exit type 'exit'.".center(lineWidth)).colorize(:color => :red, :background => :light_white)
-    input = gets.strip.downcase
-    puts
-
-    if input == "list"
-      interact
-    elsif input == "rank"
-      call
-    elsif input == "exit"
-      puts "See you next time!"
-      exit
-    else
-      puts "Please try again."
-      call
-    end
-
+    menu_bar
+    
   end
 
   def film_list(list_letter)
@@ -84,6 +71,10 @@ class TopFilms::CLI
       TopFilms::Film.all[75..99].each.with_index(76) do |film, i|
         puts "#{i}. #{film.title}"
       end
+    elsif list_letter == "x"
+      film = TopFilms::Film.all.sample
+      puts film_description(film)
+      menu_bar
     else
       puts "Please type a letter."
       call
@@ -111,6 +102,25 @@ class TopFilms::CLI
     puts ("Stars: #{film.lead_actors}".center(lineWidth))
     puts
     puts ("*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*".center(lineWidth)).light_yellow
+  end
+
+  def menu_bar
+    lineWidth = 80
+    puts ("To see another film type 'l'. Rankings type 'r'. Exit type 'e'.".center(lineWidth)).colorize(:color => :red, :background => :light_white)
+    input = gets.strip.downcase
+    puts
+
+    if input == "l"
+      interact
+    elsif input == "r"
+      call
+    elsif input == "e"
+      puts "See you next time!"
+      exit
+    else
+      puts "Please try again."
+      call
+    end
   end
 
 end
