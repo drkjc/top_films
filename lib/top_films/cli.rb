@@ -20,15 +20,13 @@ class TopFilms::CLI
 
   def start
     puts <<~DOC
-    Which films would you like to see?
-    Enter a letter for the corresponding list.
+    Type a letter to see the corresponding list.
 
-      A. 1-25
-      B. 26-50
-      C. 51-75
-      D. 76-100
-
-      If you'd like to see a random film, type 'x'.
+    A (1-25)
+    B (26-50)
+    C (51-75)
+    D (76-100)
+    X Surprise me!
 
     DOC
     @list_letter = gets.strip.downcase
@@ -40,12 +38,12 @@ class TopFilms::CLI
     film_list(list_letter)
     puts
 
-    puts "Films are in ranked order. Type rank number to explore the film."
+    puts "Films are in ranked order. Type rank number to explore the film, or 'exit'."
     puts
 
     @rank_num = gets.strip.downcase
 
-    @film = get_film(rank_num)
+    num_works?(rank_num)
 
     film_description(film)
     puts
@@ -77,7 +75,8 @@ class TopFilms::CLI
       film_description(film)
       menu_bar
     else
-      puts "Please type a letter."
+      puts "Invalid Selection".red
+      puts
       call
     end
   end
@@ -103,11 +102,17 @@ class TopFilms::CLI
     puts ("Stars: #{film.lead_actors}".center(lineWidth))
     puts
     puts ("*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*".center(lineWidth)).light_yellow
+    puts
   end
 
   def menu_bar
-    lineWidth = 80
-    puts ("To see another film type 'l'. Rankings type 'r'. Exit type 'e'.".center(lineWidth)).colorize(:color => :red, :background => :light_white)
+    lineWidth = 40
+    #("To see the list, or another random film type 'l'. Rankings type 'r'. Exit type 'e'.".center(lineWidth)).colorize(:color => :red, :background => :light_white)
+    puts ("enter 'L' to see the list again".ljust(lineWidth)).colorize(:color => :red, :background => :light_white)
+    puts
+    puts ("enter 'R' to see the rankings".ljust(lineWidth)).colorize(:color => :red, :background => :light_white)
+    puts
+    puts ("enter 'E' to exit".ljust(lineWidth)).colorize(:color => :red, :background => :light_white)
     input = gets.strip.downcase
     puts
 
@@ -116,11 +121,23 @@ class TopFilms::CLI
     elsif input == "r"
       call
     elsif input == "e"
-      puts "See you next time!"
+      puts "See you next time!".light_yellow
       exit
     else
-      puts "Please try again."
+      puts "Please try again.".red
       call
+    end
+  end
+
+  def num_works?(rank_num)
+    if @rank_num == 'exit'
+      exit
+    elsif (1..100).to_a.include?(rank_num.to_i) == false
+      @rank_num = " "
+      puts "Invalid Selection".red
+      interact
+    else
+      @film = get_film(rank_num)
     end
   end
 

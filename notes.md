@@ -19,3 +19,6 @@ Scraping data when it varied between items
 Grouping methods in cli to create usable loops
 Class methods vs instance methods
 Formatting CLI
+Colored Error Messages
+More clear instructions
+Exit from anywhere in the program
