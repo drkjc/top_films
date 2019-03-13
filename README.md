@@ -1,6 +1,6 @@
 # TopFilms
 
-Welcome to TopFilms! Sometimes we need help picking something to watch. TopFilms shows you an ordered list of the top 100 films based on IMDB's user ratings. Explore the list deeper to see the film's rating, year, description, directors, and stars! You can also randomly search and let TopFilms choose a film for you. Have fun!
+Welcome! TopFilms shows you an ordered list of the top 100 films based on IMDB's user ratings. Explore the list deeper to see the film's rating, year, description, directors, and stars! You can also randomly search and let TopFilms choose a film for you. Have fun!
 
 ## Installation
 
@@ -21,8 +21,9 @@ Or install it yourself as:
 ## Usage
 
 Type the below and follow the on screen prompts.
-
-  $ top_films 
+```ruby
+    $ top_films
+```
 
 ## Development
 
