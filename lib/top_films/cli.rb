@@ -96,21 +96,21 @@ class TopFilms::CLI
 
   def film_description(film)
     lineWidth = 75
-    puts ("~*~*~*~*~*~*~  #{film.title}#{film.year}  ~*~*~*~*~*~*~".center(lineWidth))
+    puts ("~*~*~*~*~*~*~  #{film.title}#{film.year}  ~*~*~*~*~*~*~".center(lineWidth)).blue.on_light_yellow
     puts
     puts ("#{film.advisory} | #{film.run_time} | #{film.genre}".center(lineWidth))
     puts
     puts ("#{film.rating}/10 based on #{film.votes} votes.".center(lineWidth))
     puts
-    puts ("____________Description:____________".center(lineWidth))
+    puts ("____________Description:____________".center(lineWidth)).light_yellow
     puts
     puts ("#{film.description}".center(lineWidth))
-    puts ("------------------------------------".center(lineWidth))
+    puts ("------------------------------------".center(lineWidth)).light_yellow
     puts ("Director: #{film.director}".center(lineWidth))
     puts
     puts ("Stars: #{film.lead_actors}".center(lineWidth))
     puts
-    puts ("*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*".center(lineWidth))
+    puts ("*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*".center(lineWidth)).blue.on_light_yellow
   end
 
 end

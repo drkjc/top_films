@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["derekcerretani@gmail.com"]
 
   spec.summary       = %q{Top Films}
-  spec.description   = %q{Lists the top 250 films by IMDB rating.}
+  spec.description   = %q{Lists the top 100 films by IMDB user rating.}
   spec.homepage      = "https://github.com/derekjcerretani/top_films"
   spec.license       = "MIT"
 
@@ -40,4 +40,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "nokogiri", ">=0"
   spec.add_development_dependency "pry", ">=0"
+  spec.add_development_dependency "colorize", ">=0"
 end
