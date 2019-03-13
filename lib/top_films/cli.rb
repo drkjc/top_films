@@ -33,6 +33,7 @@ class TopFilms::CLI
   end
 
   def interact
+    lineWidth = 80
     puts
 
     film_list(list_letter)
@@ -48,7 +49,7 @@ class TopFilms::CLI
     film_description(film)
     puts
 
-    puts "To see another film type 'list'. Rankings type 'rank'. Exit type 'exit'.".colorize(:color => :red, :background => :light_white)
+    puts ("To see another film type 'list'. Rankings type 'rank'. Exit type 'exit'.".center(lineWidth)).colorize(:color => :red, :background => :light_white)
     input = gets.strip.downcase
     puts
 
@@ -94,8 +95,8 @@ class TopFilms::CLI
   end
 
   def film_description(film)
-    lineWidth = 75
-    puts ("~*~*~*~*~*~*~  #{film.title}#{film.year}  ~*~*~*~*~*~*~".center(lineWidth)).colorize(:color => :blue, :background => :light_yellow)
+    lineWidth = 80
+    puts ("~*~*~*~*~*~*~  #{film.title}#{film.year}  ~*~*~*~*~*~*~".center(lineWidth)).light_yellow
     puts
     puts ("#{film.advisory} | #{film.run_time} | #{film.genre}".center(lineWidth))
     puts
@@ -109,7 +110,7 @@ class TopFilms::CLI
     puts
     puts ("Stars: #{film.lead_actors}".center(lineWidth))
     puts
-    puts ("*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*".center(lineWidth)).colorize(:color => :blue, :background => :light_yellow)
+    puts ("*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*".center(lineWidth)).light_yellow
   end
 
 end
