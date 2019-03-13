@@ -20,6 +20,7 @@ class TopFilms::CLI
 
   def start
     puts <<~DOC
+    Films are in ranked order. 
     Type a letter to see the corresponding list.
 
     A (1-25)
@@ -38,7 +39,7 @@ class TopFilms::CLI
     film_list(list_letter)
     puts
 
-    puts "Films are in ranked order. Type rank number to explore the film, or 'exit'."
+    puts "Type rank number to explore the film, or 'exit'."
     puts
 
     @rank_num = gets.strip.downcase
@@ -107,7 +108,6 @@ class TopFilms::CLI
 
   def menu_bar
     lineWidth = 40
-    #("To see the list, or another random film type 'l'. Rankings type 'r'. Exit type 'e'.".center(lineWidth)).colorize(:color => :red, :background => :light_white)
     puts ("enter 'L' to see the list again".ljust(lineWidth)).colorize(:color => :red, :background => :light_white)
     puts
     puts ("enter 'R' to see the rankings".ljust(lineWidth)).colorize(:color => :red, :background => :light_white)
