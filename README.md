@@ -22,7 +22,7 @@ Or install it yourself as:
 
 Type the below and follow the on screen prompts.
 ```ruby
-    $ top_films
+$ top_films
 ```
 
 ## Development
