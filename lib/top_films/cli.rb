@@ -7,8 +7,6 @@ puts
 
 class TopFilms::CLI
 
-  #colorize gem
-
   attr_accessor :list_letter, :film, :rank_num
 
   TopFilms::Scraper.new.make_films
@@ -50,7 +48,7 @@ class TopFilms::CLI
     film_description(film)
     puts
 
-    puts "To see another film type 'list'. Rankings type 'rank'. Exit type 'exit'."
+    puts "To see another film type 'list'. Rankings type 'rank'. Exit type 'exit'.".colorize(:color => :red, :background => :light_white)
     input = gets.strip.downcase
     puts
 
@@ -87,6 +85,7 @@ class TopFilms::CLI
       end
     else
       puts "Please type a letter."
+      call
     end
   end
 
@@ -96,7 +95,7 @@ class TopFilms::CLI
 
   def film_description(film)
     lineWidth = 75
-    puts ("~*~*~*~*~*~*~  #{film.title}#{film.year}  ~*~*~*~*~*~*~".center(lineWidth)).blue.on_light_yellow
+    puts ("~*~*~*~*~*~*~  #{film.title}#{film.year}  ~*~*~*~*~*~*~".center(lineWidth)).colorize(:color => :blue, :background => :light_yellow)
     puts
     puts ("#{film.advisory} | #{film.run_time} | #{film.genre}".center(lineWidth))
     puts
@@ -110,7 +109,7 @@ class TopFilms::CLI
     puts
     puts ("Stars: #{film.lead_actors}".center(lineWidth))
     puts
-    puts ("*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*".center(lineWidth)).blue.on_light_yellow
+    puts ("*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*".center(lineWidth)).colorize(:color => :blue, :background => :light_yellow)
   end
 
 end
