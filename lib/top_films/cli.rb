@@ -46,9 +46,9 @@ class TopFilms::CLI
     puts
     film_list(list_letter)
 
-    puts ("Enter rank number to explore the film.".center(lineWidth)).colorize(:color => :red, :background => :light_white)
+    puts ("enter rank number to explore the film.".center(lineWidth)).colorize(:color => :red, :background => :light_white)
     puts ("or".center(lineWidth)).light_yellow
-    puts ("'E' to exit.".center(lineWidth)).colorize(:color => :red, :background => :light_white)
+    puts ("enter 'R' to go back | 'E' to exit.".center(lineWidth)).colorize(:color => :red, :background => :light_white)
 
     @rank_num = gets.strip.downcase
 
@@ -128,11 +128,12 @@ class TopFilms::CLI
     input = gets.strip.downcase
     puts
 
-    if input == "l"
+    case input
+    when "l"
       interact
-    elsif input == "r"
+    when "r"
       call
-    elsif input == "e"
+    when "e"
       puts "See you next time!".light_yellow
       puts
       exit
@@ -141,11 +142,14 @@ class TopFilms::CLI
       puts
       menu_bar
     end
+
   end
 
   def num_works?(rank_num)
-    if @rank_num == 'e'
+    if @rank_num == "e"
       exit
+    elsif @rank_num == "r"
+      call
     elsif (1..100).to_a.include?(rank_num.to_i) == false
       @rank_num = " "
       puts "Invalid Selection".red
