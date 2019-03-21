@@ -24,4 +24,11 @@ class TopFilms::Film
     @@all
   end
 
+  #return a list of films in alphabetical order by title
+  def self.return_title
+    alph_array = TopFilms::Film.all.sort_by do |film|
+      film.title
+    end
+  end
+
 end
