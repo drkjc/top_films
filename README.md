@@ -2,6 +2,8 @@
 
 Welcome! TopFilms shows you an ordered list of the top 100 films based on IMDB's user ratings. Explore the list deeper to see the film's rating, year, description, directors, and stars! You can also randomly search and let TopFilms choose a film for you. Have fun!
 
+[Video Walkthrough](https://www.youtube.com/watch?v=bGko9ODBS6s&feature=youtu.be)
+
 ## Installation
 
 Clone the project, navigate to the top_films folder, and enter:
